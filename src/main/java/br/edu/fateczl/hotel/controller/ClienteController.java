@@ -18,48 +18,71 @@ public class ClienteController {
 
     @GetMapping
     public String carregarForm(Model model) {
+
         model.addAttribute("Cliente", new ClienteDTO(null, null, null, null, null));
         model.addAttribute("mensagem", null);
         model.addAttribute("resultadoBusca", null);
         model.addAttribute("listaClientes", null);
+
         return "Clientes";
+
     }
 
     @PostMapping("/criar")
-    public String criarCliente(@ModelAttribute @Valid ClienteDTO cliente, Model model) {
+    public String criarCliente(@ModelAttribute ClienteDTO cliente, Model model) {
+
         String mensagem = clienteService.criarCliente(cliente);
+
         model.addAttribute("mensagem", mensagem);
         model.addAttribute("Cliente", new ClienteDTO(null, null, null, null, null));
+
         return "Clientes";
+
     }
 
     @PostMapping("/buscar")
-    public String buscarClientePorId(@RequestParam Long id, Model model) {
-        ClienteDTO cliente = clienteService.buscarClientePorId(id);
+    public String buscarClientePorId(@RequestParam String cpf, Model model) {
+
+        ClienteDTO cliente = clienteService.buscarClientePorId(cpf);
+
         model.addAttribute("resultadoBusca", cliente);
         model.addAttribute("Cliente", new ClienteDTO(null, null, null, null, null));
+
         return "Clientes";
+
     }
 
     @PostMapping("/atualizar")
-    public String atualizarCliente(@ModelAttribute @Valid ClienteDTO cliente, Model model) {
+    public String atualizarCliente(@ModelAttribute ClienteDTO cliente, Model model) {
+
         String mensagem = clienteService.atualizarCliente(cliente);
+
         model.addAttribute("mensagem", mensagem);
+
         return "Clientes";
+
     }
 
     @PostMapping("/excluir")
-    public String excluirCliente(@RequestParam Long id, Model model) {
-        String mensagem = clienteService.excluirCliente(id);
+    public String excluirCliente(@RequestParam String cpf, Model model) {
+
+        String mensagem = clienteService.excluirCliente(cpf);
+
         model.addAttribute("mensagem", mensagem);
+
         return "Clientes";
+
     }
 
     @PostMapping("/listar")
     public String listarClientes(Model model) {
+
         List<ClienteDTO> lista = clienteService.listarClientes();
+
         model.addAttribute("listaClientes", lista);
+
         return "Clientes";
+
     }
 
 }

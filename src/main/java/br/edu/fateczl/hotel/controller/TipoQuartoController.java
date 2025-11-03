@@ -18,48 +18,70 @@ public class TipoQuartoController {
 
     @GetMapping
     public String carregarForm(Model model) {
+
         model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null, null, null));
         model.addAttribute("mensagem", null);
         model.addAttribute("resultadoBusca", null);
         model.addAttribute("listaTipoQuartos", null);
+
         return "tipoQuartos";
+
     }
 
     @PostMapping("/criar")
-    public String criarTipoQuarto(@ModelAttribute @Valid TipoQuartoDTO tipoQuarto, Model model) {
+    public String criarTipoQuarto(@ModelAttribute TipoQuartoDTO tipoQuarto, Model model) {
+
         String mensagem = tipoQuartoService.criarTipoQuarto(tipoQuarto);
+
         model.addAttribute("mensagem", mensagem);
         model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null, null, null));
+
         return "tipoQuartos";
+
     }
 
     @PostMapping("/buscar")
     public String buscarTipoQuartoPorId(@RequestParam Long id, Model model) {
+
         TipoQuartoDTO tipoQuarto = tipoQuartoService.buscarTipoQuartoPorId(id);
+
         model.addAttribute("resultadoBusca", tipoQuarto);
         model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null, null, null));
+
         return "tipoQuartos";
+
     }
 
     @PostMapping("/atualizar")
-    public String atualizarTipoQuarto(@ModelAttribute @Valid TipoQuartoDTO tipoQuarto, Model model) {
+    public String atualizarTipoQuarto(@ModelAttribute TipoQuartoDTO tipoQuarto, Model model) {
+
         String mensagem = tipoQuartoService.atualizarTipoQuarto(tipoQuarto);
+
         model.addAttribute("mensagem", mensagem);
+
         return "tipoQuartos";
+
     }
 
     @PostMapping("/excluir")
     public String excluirTipoQuarto(@RequestParam Long id, Model model) {
+
         String mensagem = tipoQuartoService.excluirTipoQuarto(id);
         model.addAttribute("mensagem", mensagem);
+
         return "tipoQuartos";
+
     }
 
     @PostMapping("/listar")
     public String listarTipoQuartos(Model model) {
+
         List<TipoQuartoDTO> lista = tipoQuartoService.listarTipoQuartos();
+
         model.addAttribute("listaTipoQuartos", lista);
+
         return "tipoQuartos";
+
     }
 
 }
