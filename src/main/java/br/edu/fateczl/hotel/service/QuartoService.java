@@ -25,13 +25,13 @@ public class QuartoService {
         Quarto entidade = quartoMapper.toEntity(dto);
         quartoRepository.save(entidade);
 
-        return "Quarto criada com sucesso!";
+        return "Quarto criado com sucesso!";
 
     }
 
     public QuartoDTO buscarQuartoPorId(Long id) {
 
-        Quarto quarto = quartoRepository.findById(id).orElseThrow(() -> new RuntimeException("Quarto não encontrada"));
+        Quarto quarto = quartoRepository.findById(id).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
 
         return quartoMapper.toDto(quarto);
 
@@ -40,11 +40,11 @@ public class QuartoService {
     @Transactional
     public String atualizarQuarto(QuartoDTO dto) {
 
-        Quarto quarto = quartoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Quarto não encontrada"));
+        Quarto quarto = quartoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
         quartoMapper.updateEntityFromDto(dto, quarto);
         quartoRepository.save(quarto);
 
-        return "Quarto atualizada com sucesso!";
+        return "Quarto atualizado com sucesso!";
 
     }
 
@@ -53,7 +53,7 @@ public class QuartoService {
 
         quartoRepository.deleteById(id);
 
-        return "Quarto excluida com sucesso!";
+        return "Quarto excluido com sucesso!";
 
     }
 

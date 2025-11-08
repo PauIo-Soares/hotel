@@ -41,7 +41,7 @@ public class ClienteController {
     }
 
     @PostMapping("/buscar")
-    public String buscarClientePorId(@RequestParam String cpf, Model model) {
+    public String buscarClientePorCpf(@RequestParam String cpf, Model model) {
 
         ClienteDTO cliente = clienteService.buscarClientePorId(cpf);
 
@@ -64,9 +64,9 @@ public class ClienteController {
     }
 
     @PostMapping("/excluir")
-    public String excluirCliente(@RequestParam String cpf, Model model) {
+    public String excluirClientePorCpf(@RequestParam String cpf, Model model) {
 
-        String mensagem = clienteService.excluirCliente(cpf);
+        String mensagem = clienteService.excluirClientePorCpf(cpf);
 
         model.addAttribute("mensagem", mensagem);
 

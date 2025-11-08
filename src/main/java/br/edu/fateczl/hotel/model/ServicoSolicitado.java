@@ -1,9 +1,6 @@
 package br.edu.fateczl.hotel.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,10 +12,8 @@ import java.time.LocalDateTime;
 public class ServicoSolicitado {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "data_solicitacao", nullable = false)
-    private LocalDateTime dataSolicitacao;
 
     @Column(nullable = false)
     private Integer quantidade;
@@ -26,11 +21,12 @@ public class ServicoSolicitado {
     @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
 
-
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "servico_id", nullable = false)
     private Servico servico;
 
-    @Column(nullable = false)
-    private Hospedagem hospedagem;
+    @ManyToOne
+    @JoinColumn(name = "estadia_id", nullable = false)
+    private Estadia estadia;
 
 }

@@ -25,13 +25,13 @@ public class TipoQuartoService {
         TipoQuarto entidade = tipoQuartoMapper.toEntity(dto);
         tipoQuartoRepository.save(entidade);
 
-        return "TipoQuarto criada com sucesso!";
+        return "Tipo de Quarto criado com sucesso!";
 
     }
 
     public TipoQuartoDTO buscarTipoQuartoPorId(Long id) {
 
-        TipoQuarto tipoQuarto = tipoQuartoRepository.findById(id).orElseThrow(() -> new RuntimeException("TipoQuarto não encontrada"));
+        TipoQuarto tipoQuarto = tipoQuartoRepository.findById(id).orElseThrow(() -> new RuntimeException("Tipo de Quarto não encontrado"));
 
         return tipoQuartoMapper.toDto(tipoQuarto);
 
@@ -40,11 +40,11 @@ public class TipoQuartoService {
     @Transactional
     public String atualizarTipoQuarto(TipoQuartoDTO dto) {
 
-        TipoQuarto tipoQuarto = tipoQuartoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("TipoQuarto não encontrada"));
+        TipoQuarto tipoQuarto = tipoQuartoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Tipo de Quarto não encontrado"));
         tipoQuartoMapper.updateEntityFromDto(dto, tipoQuarto);
         tipoQuartoRepository.save(tipoQuarto);
 
-        return "TipoQuarto atualizada com sucesso!";
+        return "Tipo de Quarto atualizado com sucesso!";
 
     }
 
@@ -53,11 +53,11 @@ public class TipoQuartoService {
 
         tipoQuartoRepository.deleteById(id);
 
-        return "TipoQuarto excluida com sucesso!";
+        return "Tipo de Quarto excluido com sucesso!";
 
     }
 
-    public List<TipoQuartoDTO> listarTipoQuartos() {
+    public List<TipoQuartoDTO> listarTiposQuarto() {
         return tipoQuartoRepository.findAll().stream().map(tipoQuartoMapper::toDto).toList();
     }
 

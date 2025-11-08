@@ -1,0 +1,38 @@
+package br.edu.fateczl.hotel.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+@Table(name = "tb_estadias")
+@Entity
+public class Estadia {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "data_check_in", nullable = false)
+    private LocalDateTime dataCheckIn;
+
+    @Column(name = "data_check_out", nullable = false)
+    private LocalDateTime dataCheckOut;
+
+    @Column(name = "valor_total", nullable = false)
+    private BigDecimal valorTotal; // Diarias + Servicos
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "quarto_id", nullable = false)
+    private Quarto quarto;
+
+    private List<ServicoSolicitado> servicosSolicitados;
+
+}

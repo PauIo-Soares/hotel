@@ -1,9 +1,6 @@
 package br.edu.fateczl.hotel.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -14,13 +11,11 @@ import java.math.BigDecimal;
 public class TipoQuarto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     private String nome;
-
-    @Column(nullable = false)
-    private String descricao;
 
     @Column(nullable = false)
     private BigDecimal valorDiaria;

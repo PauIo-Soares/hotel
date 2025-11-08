@@ -29,9 +29,9 @@ public class ClienteService {
 
     }
 
-    public ClienteDTO buscarClientePorId(String cpf) {
+    public ClienteDTO buscarClientePorCpf(String cpf) {
 
-        Cliente cliente = clienteRepository.findById(cpf).orElseThrow(() -> new RuntimeException("Cliente não encontrada"));
+        Cliente cliente = clienteRepository.findByCpf(cpf).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
         return clienteMapper.toDto(cliente);
 
@@ -40,20 +40,20 @@ public class ClienteService {
     @Transactional
     public String atualizarCliente(ClienteDTO dto) {
 
-        Cliente cliente = clienteRepository.findById(dto.cpf()).orElseThrow(() -> new RuntimeException("Cliente não encontrada"));
+        Cliente cliente = clienteRepository.findById(dto.cpf()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         clienteMapper.updateEntityFromDto(dto, cliente);
         clienteRepository.save(cliente);
 
-        return "Cliente atualizada com sucesso!";
+        return "Cliente atualizado com sucesso!";
 
     }
 
     @Transactional
-    public String excluirCliente(String cpf) {
+    public String excluirClientePorCpf(String cpf) {
 
-        clienteRepository.deleteById(cpf);
+        clienteRepository.deleteByCpf(cpf);
 
-        return "Cliente excluida com sucesso!";
+        return "Cliente excluido com sucesso!";
 
     }
 

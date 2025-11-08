@@ -1,9 +1,6 @@
 package br.edu.fateczl.hotel.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,10 +12,11 @@ import java.time.LocalDateTime;
 public class Reserva {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "data_reserva", nullable = false)
-    private LocalDateTime dataReserva;
+    private LocalDate dataReserva;
 
     @Column(name = "data_inicio", nullable = false)
     private LocalDate dataInicio;
@@ -26,12 +24,12 @@ public class Reserva {
     @Column(name = "quantidade_dias", nullable = false)
     private Integer quantidadeDias;
 
-    private Enum status;
-
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "quarto_id", nullable = false)
     private Quarto quarto;
 
 }

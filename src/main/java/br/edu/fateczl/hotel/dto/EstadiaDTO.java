@@ -1,4 +1,4 @@
 package br.edu.fateczl.hotel.dto;
 
-public record HospedagemDTO() {
+public record EstadiaDTO() {
 }

@@ -74,11 +74,11 @@ public class TipoQuartoController {
     }
 
     @PostMapping("/listar")
-    public String listarTipoQuartos(Model model) {
+    public String listarTiposQuarto(Model model) {
 
-        List<TipoQuartoDTO> lista = tipoQuartoService.listarTipoQuartos();
+        List<TipoQuartoDTO> lista = tipoQuartoService.listarTiposQuarto();
 
-        model.addAttribute("listaTipoQuartos", lista);
+        model.addAttribute("listaTiposQuarto", lista);
 
         return "tipoQuartos";
 
