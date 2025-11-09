@@ -5,6 +5,7 @@ public record QuartoDTO(
         Long id,
         Integer numero,
         Integer andar,
-        String descricao
+        String descricao,
+        Long tipoQuartoId
 
-) {}
+) { }

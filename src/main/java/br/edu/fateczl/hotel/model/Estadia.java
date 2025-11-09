@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Table(name = "tb_estadias")
@@ -24,6 +23,7 @@ public class Estadia {
 
     @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal; // Diarias + Servicos
+    // calcularValorTotal, service? Pq pode ser calculado dinamicamente, nem precisa gravar no banco, só o valor final
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
@@ -33,7 +33,4 @@ public class Estadia {
     @JoinColumn(name = "quarto_id", nullable = false)
     private Quarto quarto;
 
-    private List<ServicoSolicitado> servicosSolicitados;
-
-    // getValorTotal ou fica na service, seila
 }
