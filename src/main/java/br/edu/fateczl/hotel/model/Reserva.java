@@ -1,5 +1,6 @@
 package br.edu.fateczl.hotel.model;
 
+import br.edu.fateczl.hotel.enums.StatusReserva;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,5 +32,9 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "quarto_id", nullable = false)
     private Quarto quarto;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private StatusReserva status;
 
 }

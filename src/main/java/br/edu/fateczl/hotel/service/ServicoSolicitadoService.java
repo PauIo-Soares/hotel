@@ -1,4 +1,6 @@
 package br.edu.fateczl.hotel.service;
 
-public class ServicoSolicitadoService {
-}
+import org.springframework.stereotype.Service;
+
+@Service
+public class ServicoSolicitadoService { }

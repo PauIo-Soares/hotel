@@ -21,4 +21,8 @@ public class Quarto {
     @Column(nullable = false)
     private String descricao;
 
+    @ManyToOne
+    @JoinColumn(name = "tipo_quarto_id", nullable = false)
+    private TipoQuarto tipoQuarto;
+
 }

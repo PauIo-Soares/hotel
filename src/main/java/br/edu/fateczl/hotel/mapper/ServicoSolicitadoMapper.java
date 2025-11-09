@@ -1,3 +1,6 @@
 package br.edu.fateczl.hotel.mapper;
 
-public interface ServicoSolicitadoMapper { }
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface ServicoSolicitadoMapper {}

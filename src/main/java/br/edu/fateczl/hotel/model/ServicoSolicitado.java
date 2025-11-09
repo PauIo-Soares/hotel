@@ -22,11 +22,11 @@ public class ServicoSolicitado {
     private BigDecimal valorTotal;
 
     @ManyToOne
-    @JoinColumn(name = "servico_id", nullable = false)
-    private Servico servico;
-
-    @ManyToOne
     @JoinColumn(name = "estadia_id", nullable = false)
     private Estadia estadia;
+
+    @ManyToOne
+    @JoinColumn(name = "servico_id", nullable = false)
+    private Servico servico;
 
 }

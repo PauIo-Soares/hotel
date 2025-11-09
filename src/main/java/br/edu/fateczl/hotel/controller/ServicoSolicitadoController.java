@@ -4,6 +4,5 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/relatorio")
-public class RelatorioController {
-}
+@RequestMapping("/servicoSolicitado")
+public class ServicoSolicitadoController { }

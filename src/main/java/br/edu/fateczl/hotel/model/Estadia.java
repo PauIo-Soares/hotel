@@ -35,4 +35,5 @@ public class Estadia {
 
     private List<ServicoSolicitado> servicosSolicitados;
 
+    // getValorTotal ou fica na service, seila
 }
