@@ -41,6 +41,7 @@ public class EstadiaService {
     public String atualizarEstadia(EstadiaDTO dto) {
 
         Estadia estadia = estadiaRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Estadia não encontrada"));
+
         estadiaMapper.updateEntityFromDto(dto, estadia);
         estadiaRepository.save(estadia);
 
@@ -50,6 +51,8 @@ public class EstadiaService {
 
     @Transactional
     public String excluirEstadia(Long id) {
+
+        estadiaRepository.findById(id).orElseThrow(() -> new RuntimeException("Estadia não encontrada"));
 
         estadiaRepository.deleteById(id);
 

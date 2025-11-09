@@ -43,7 +43,7 @@ public class ClienteController {
     @PostMapping("/buscar")
     public String buscarClientePorCpf(@RequestParam String cpf, Model model) {
 
-        ClienteDTO cliente = clienteService.buscarClientePorId(cpf);
+        ClienteDTO cliente = clienteService.buscarClientePorCpf(cpf);
 
         model.addAttribute("resultadoBusca", cliente);
         model.addAttribute("Cliente", new ClienteDTO(null, null, null, null, null));

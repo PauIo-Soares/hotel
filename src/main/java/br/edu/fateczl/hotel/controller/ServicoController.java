@@ -19,7 +19,7 @@ public class ServicoController {
     @GetMapping
     public String carregarForm(Model model) {
 
-        model.addAttribute("servico", new ServicoDTO(null, null, null, null, null));
+        model.addAttribute("servico", new ServicoDTO(null, null, null, null));
         model.addAttribute("mensagem", null);
         model.addAttribute("resultadoBusca", null);
         model.addAttribute("listaServicos", null);
@@ -34,7 +34,7 @@ public class ServicoController {
         String mensagem = servicoService.criarServico(servico);
 
         model.addAttribute("mensagem", mensagem);
-        model.addAttribute("servico", new ServicoDTO(null, null, null, null, null));
+        model.addAttribute("servico", new ServicoDTO(null, null, null, null));
 
         return "servicos";
 
@@ -46,7 +46,7 @@ public class ServicoController {
         ServicoDTO servico = servicoService.buscarServicoPorId(id);
 
         model.addAttribute("resultadoBusca", servico);
-        model.addAttribute("servico", new ServicoDTO(null, null, null, null, null));
+        model.addAttribute("servico", new ServicoDTO(null, null, null, null));
 
         return "servicos";
 

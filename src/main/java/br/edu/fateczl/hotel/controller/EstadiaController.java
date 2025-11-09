@@ -19,7 +19,7 @@ public class EstadiaController {
     @GetMapping
     public String carregarForm(Model model) {
 
-        model.addAttribute("estadia", new EstadiaDTO(null, null, null, null, null));
+        model.addAttribute("estadia", new EstadiaDTO(null, null, null, null, null, null));
         model.addAttribute("mensagem", null);
         model.addAttribute("resultadoBusca", null);
         model.addAttribute("listaEstadia", null);
@@ -34,7 +34,7 @@ public class EstadiaController {
         String mensagem = estadiaService.criarEstadia(estadia);
 
         model.addAttribute("mensagem", mensagem);
-        model.addAttribute("estadia", new EstadiaDTO(null, null, null, null, null));
+        model.addAttribute("estadia", new EstadiaDTO(null, null, null, null, null, null));
 
         return "estadia";
 

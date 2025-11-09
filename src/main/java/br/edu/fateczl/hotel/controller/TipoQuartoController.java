@@ -19,7 +19,7 @@ public class TipoQuartoController {
     @GetMapping
     public String carregarForm(Model model) {
 
-        model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null, null, null));
+        model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null));
         model.addAttribute("mensagem", null);
         model.addAttribute("resultadoBusca", null);
         model.addAttribute("listaTipoQuartos", null);
@@ -34,7 +34,7 @@ public class TipoQuartoController {
         String mensagem = tipoQuartoService.criarTipoQuarto(tipoQuarto);
 
         model.addAttribute("mensagem", mensagem);
-        model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null, null, null));
+        model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null));
 
         return "tipoQuartos";
 
@@ -46,7 +46,7 @@ public class TipoQuartoController {
         TipoQuartoDTO tipoQuarto = tipoQuartoService.buscarTipoQuartoPorId(id);
 
         model.addAttribute("resultadoBusca", tipoQuarto);
-        model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null, null, null));
+        model.addAttribute("tipoQuarto", new TipoQuartoDTO(null, null, null));
 
         return "tipoQuartos";
 

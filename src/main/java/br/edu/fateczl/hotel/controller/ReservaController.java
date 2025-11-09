@@ -19,7 +19,7 @@ public class ReservaController {
     @GetMapping
     public String carregarForm(Model model) {
 
-        model.addAttribute("reserva", new ReservaDTO(null, null, null, null, null));
+        model.addAttribute("reserva", new ReservaDTO(null, null, null, null, null, null, null));
         model.addAttribute("mensagem", null);
         model.addAttribute("resultadoBusca", null);
         model.addAttribute("listaReservas", null);
@@ -34,7 +34,7 @@ public class ReservaController {
         String mensagem = reservaService.criarReserva(reserva);
 
         model.addAttribute("mensagem", mensagem);
-        model.addAttribute("reserva", new ReservaDTO(null, null, null, null, null));
+        model.addAttribute("reserva", new ReservaDTO(null, null, null, null, null, null, null));
 
         return "reservas";
 
@@ -46,7 +46,7 @@ public class ReservaController {
         ReservaDTO reserva = reservaService.buscarReservaPorId(id);
 
         model.addAttribute("resultadoBusca", reserva);
-        model.addAttribute("reserva", new ReservaDTO(null, null, null, null, null));
+        model.addAttribute("reserva", new ReservaDTO(null, null, null, null, null, null, null));
 
         return "reservas";
 

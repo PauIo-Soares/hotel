@@ -41,6 +41,7 @@ public class QuartoService {
     public String atualizarQuarto(QuartoDTO dto) {
 
         Quarto quarto = quartoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
+
         quartoMapper.updateEntityFromDto(dto, quarto);
         quartoRepository.save(quarto);
 
@@ -50,6 +51,8 @@ public class QuartoService {
 
     @Transactional
     public String excluirQuarto(Long id) {
+
+        quartoRepository.findById(id).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
 
         quartoRepository.deleteById(id);
 

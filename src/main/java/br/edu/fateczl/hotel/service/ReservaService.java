@@ -41,6 +41,7 @@ public class ReservaService {
     public String atualizarReserva(ReservaDTO dto) {
 
         Reserva reserva = reservaRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Reserva não encontrada"));
+
         reservaMapper.updateEntityFromDto(dto, reserva);
         reservaRepository.save(reserva);
 
@@ -50,6 +51,8 @@ public class ReservaService {
 
     @Transactional
     public String excluirReserva(Long id) {
+
+        reservaRepository.findById(id).orElseThrow(() -> new RuntimeException("Reserva não encontrada"));
 
         reservaRepository.deleteById(id);
 

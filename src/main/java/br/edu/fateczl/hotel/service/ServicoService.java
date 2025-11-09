@@ -41,6 +41,7 @@ public class ServicoService {
     public String atualizarServico(ServicoDTO dto) {
 
         Servico servico = servicoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Servico não encontrado"));
+
         servicoMapper.updateEntityFromDto(dto, servico);
         servicoRepository.save(servico);
 
@@ -50,6 +51,8 @@ public class ServicoService {
 
     @Transactional
     public String excluirServico(Long id) {
+
+        servicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
 
         servicoRepository.deleteById(id);
 

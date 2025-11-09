@@ -41,6 +41,7 @@ public class TipoQuartoService {
     public String atualizarTipoQuarto(TipoQuartoDTO dto) {
 
         TipoQuarto tipoQuarto = tipoQuartoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Tipo de Quarto não encontrado"));
+
         tipoQuartoMapper.updateEntityFromDto(dto, tipoQuarto);
         tipoQuartoRepository.save(tipoQuarto);
 
@@ -50,6 +51,9 @@ public class TipoQuartoService {
 
     @Transactional
     public String excluirTipoQuarto(Long id) {
+
+        tipoQuartoRepository.findById(id).orElseThrow(() -> new RuntimeException("Tipo de Quarto não encontrado"));
+
 
         tipoQuartoRepository.deleteById(id);
 

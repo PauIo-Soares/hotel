@@ -40,7 +40,8 @@ public class ClienteService {
     @Transactional
     public String atualizarCliente(ClienteDTO dto) {
 
-        Cliente cliente = clienteRepository.findById(dto.cpf()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        Cliente cliente = clienteRepository.findByCpf(dto.cpf()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
         clienteMapper.updateEntityFromDto(dto, cliente);
         clienteRepository.save(cliente);
 
@@ -50,6 +51,8 @@ public class ClienteService {
 
     @Transactional
     public String excluirClientePorCpf(String cpf) {
+
+        clienteRepository.findByCpf(cpf).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
         clienteRepository.deleteByCpf(cpf);
 
