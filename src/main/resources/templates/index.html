@@ -1,11 +1,54 @@
-<!doctype html>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento - Hotel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div class="container">
+    <h1>Sistema de Gerenciamento - Hotel</h1>
 
+    <div class="index-links">
+        <div class="index-card">
+            <h3>Clientes</h3>
+            <a th:href="@{/cliente}">Gerenciar Clientes</a>
+        </div>
+
+        <div class="index-card">
+            <h3>Quartos</h3>
+            <a th:href="@{/quarto}">Gerenciar Quartos</a>
+        </div>
+
+        <div class="index-card">
+            <h3>Tipos de Quarto</h3>
+            <a th:href="@{/tipoQuarto}">Gerenciar Tipos de Quarto</a>
+        </div>
+
+        <div class="index-card">
+            <h3>Serviços</h3>
+            <a th:href="@{/servico}">Gerenciar Serviços</a>
+        </div>
+
+        <div class="index-card">
+            <h3>Relatórios</h3>
+            <a th:href="@{/relatorio}">Gerar Relatórios</a>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Rotinas do Sistema</h2>
+
+    <form th:action="@{/reserva/remover-vencidas}" method="post">
+        <button type="submit" class="btn-warning">Executar Rotina: Remover Reservas Vencidas</button>
+    </form>
+
+    <div th:if="${mensagem}"
+         th:class="${mensagem.contains('sucesso') or mensagem.contains('Sucesso') or mensagem.contains('executada') ? 'mensagem sucesso' : 'mensagem erro'}">
+        <p th:text="${mensagem}"></p>
+    </div>
+</div>
 </body>
 </html>

@@ -85,4 +85,10 @@ public class ReservaController {
 
     }
 
+    @PostMapping("/remover-vencidas")
+    public String removerReservasVencidas(Model model) {
+        reservaService.removerReservasVencidas();
+        return "index";
+    }
+
 }

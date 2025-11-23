@@ -60,7 +60,7 @@ public class EstadiaService {
 
     }
 
-    public List<EstadiaDTO> listarEstadia() {
+    public List<EstadiaDTO> listarEstadias() {
         return estadiaRepository.findAll().stream().map(estadiaMapper::toDto).toList();
     }
 

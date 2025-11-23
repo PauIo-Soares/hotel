@@ -76,7 +76,7 @@ public class EstadiaController {
     @PostMapping("/listar")
     public String listarEstadias(Model model) {
 
-        List<EstadiaDTO> lista = estadiaService.listarEstadia();
+        List<EstadiaDTO> lista = estadiaService.listarEstadias();
 
         model.addAttribute("listaEstadia", lista);
 

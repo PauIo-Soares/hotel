@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Quartos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Gerenciamento de Quartos</h1>
+
+    <div th:if="${mensagem}"
+         th:class="${mensagem.contains('sucesso') or mensagem.contains('Sucesso') ? 'mensagem sucesso' : 'mensagem erro'}">
+        <p th:text="${mensagem}"></p>
+    </div>
+
+    <h2>Cadastrar/Atualizar Quarto</h2>
+    <form th:action="@{/quarto/criar}" th:object="${quarto}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group">
+            <label for="numero">Número:</label>
+            <input type="number" id="numero" th:field="*{numero}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="andar">Andar:</label>
+            <input type="number" id="andar" th:field="*{andar}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" th:field="*{descricao}" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="tipoQuartoId">ID do Tipo de Quarto:</label>
+            <input type="number" id="tipoQuartoId" th:field="*{tipoQuartoId}" required>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn-primary">Cadastrar</button>
+            <button type="submit" formaction="/quarto/atualizar" class="btn-warning">Atualizar</button>
+        </div>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <h2>Buscar Quarto por Número</h2>
+    <form th:action="@{/quarto/buscar}" method="post" class="form-inline">
+        <div class="form-group">
+            <label for="numeroBusca">Número do Quarto:</label>
+            <input type="number" id="numeroBusca" name="numero" required>
+        </div>
+        <button type="submit" class="btn-info">Buscar</button>
+    </form>
+
+    <div th:if="${resultadoBusca}" class="resultado-busca">
+        <h3>Resultado da Busca</h3>
+        <p><strong>ID:</strong> <span th:text="${resultadoBusca.id}"></span></p>
+        <p><strong>Número:</strong> <span th:text="${resultadoBusca.numero}"></span></p>
+        <p><strong>Andar:</strong> <span th:text="${resultadoBusca.andar}"></span></p>
+        <p><strong>Descrição:</strong> <span th:text="${resultadoBusca.descricao}"></span></p>
+        <p><strong>ID do Tipo de Quarto:</strong> <span th:text="${resultadoBusca.tipoQuartoId}"></span></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Excluir Quarto</h2>
+    <form th:action="@{/quarto/excluir}" method="post" class="form-inline">
+        <div class="form-group">
+            <label for="numeroExcluir">Numero:</label>
+            <input type="number" id="numeroExcluir" name="numero" required>
+        </div>
+        <button type="submit" class="btn-danger">Excluir</button>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <h2>Listar Todos os Quartos</h2>
+    <form th:action="@{/quarto/listar}" method="post">
+        <button type="submit" class="btn-success">Listar Todos</button>
+    </form>
+
+    <div th:if="${listaQuartos}">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Número</th>
+                <th>Andar</th>
+                <th>Descrição</th>
+                <th>ID Tipo de Quarto</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="quarto : ${listaQuartos}">
+                <td th:text="${quarto.id}"></td>
+                <td th:text="${quarto.numero}"></td>
+                <td th:text="${quarto.andar}"></td>
+                <td th:text="${quarto.descricao}"></td>
+                <td th:text="${quarto.tipoQuartoId}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a th:href="@{/}" class="voltar-link">← Voltar para o Menu Principal</a>
+</div>
+</body>
+</html>

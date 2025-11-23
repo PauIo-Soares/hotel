@@ -29,9 +29,9 @@ public class QuartoService {
 
     }
 
-    public QuartoDTO buscarQuartoPorId(Long id) {
+    public QuartoDTO buscarQuartoPorNumero(Integer numero) {
 
-        Quarto quarto = quartoRepository.findById(id).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
+        Quarto quarto = quartoRepository.findByNumero(numero).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
 
         return quartoMapper.toDto(quarto);
 
@@ -40,7 +40,7 @@ public class QuartoService {
     @Transactional
     public String atualizarQuarto(QuartoDTO dto) {
 
-        Quarto quarto = quartoRepository.findById(dto.id()).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
+        Quarto quarto = quartoRepository.findByNumero(dto.numero()).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
 
         quartoMapper.updateEntityFromDto(dto, quarto);
         quartoRepository.save(quarto);
@@ -50,11 +50,11 @@ public class QuartoService {
     }
 
     @Transactional
-    public String excluirQuarto(Long id) {
+    public String excluirQuartoPorNumero(Integer numero) {
 
-        quartoRepository.findById(id).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
+        quartoRepository.findByNumero(numero).orElseThrow(() -> new RuntimeException("Quarto não encontrado"));
 
-        quartoRepository.deleteById(id);
+        quartoRepository.deleteByNumero(numero);
 
         return "Quarto excluido com sucesso!";
 

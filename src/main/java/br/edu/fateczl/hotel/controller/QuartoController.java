@@ -41,9 +41,9 @@ public class QuartoController {
     }
 
     @PostMapping("/buscar")
-    public String buscarQuartoPorId(@RequestParam Long id, Model model) {
+    public String buscarQuartoPorNumero(@RequestParam Integer numero, Model model) {
 
-        QuartoDTO quarto = quartoService.buscarQuartoPorId(id);
+        QuartoDTO quarto = quartoService.buscarQuartoPorNumero(numero);
 
         model.addAttribute("resultadoBusca", quarto);
         model.addAttribute("quarto", new QuartoDTO(null, null, null, null, null));
@@ -64,9 +64,9 @@ public class QuartoController {
     }
 
     @PostMapping("/excluir")
-    public String excluirQuarto(@RequestParam Long id, Model model) {
+    public String excluirQuartoPorNumero(@RequestParam Integer numero, Model model) {
 
-        String mensagem = quartoService.excluirQuarto(id);
+        String mensagem = quartoService.excluirQuartoPorNumero(numero);
 
         model.addAttribute("mensagem", mensagem);
 

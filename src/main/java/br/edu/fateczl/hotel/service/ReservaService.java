@@ -64,4 +64,8 @@ public class ReservaService {
         return reservaRepository.findAll().stream().map(reservaMapper::toDto).toList();
     }
 
+    public String removerReservasVencidas() {
+        //TODO lógica, pode chamar uma procedure talvez
+        return "Reservas vencidas removidas com sucesso.";
+    }
 }
