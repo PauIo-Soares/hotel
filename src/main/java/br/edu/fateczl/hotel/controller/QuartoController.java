@@ -1,12 +1,14 @@
 package br.edu.fateczl.hotel.controller;
 
 import br.edu.fateczl.hotel.dto.QuartoDTO;
+import br.edu.fateczl.hotel.dto.QuartoDisponivelDTO;
 import br.edu.fateczl.hotel.service.QuartoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -85,4 +87,22 @@ public class QuartoController {
 
     }
 
+    @GetMapping("/disponiveis")
+    public String listarTodosQuartosDisponiveis(Model model){
+
+        return "QuartosDisponiveis";
+
+    }
+
+    @PostMapping("/quartos-disponiveis")
+    public String listarQuartosDisponiveis(@RequestParam String data, Model model) {
+
+        LocalDate d = LocalDate.parse(data);
+
+        List<QuartoDisponivelDTO> lista = quartoService.listarQuartosDisponiveis(d);
+
+        model.addAttribute("listaQuartos", lista);
+
+        return "QuartosDisponiveis";
+    }
 }

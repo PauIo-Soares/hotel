@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta viewport="width=device-width, initial-scale=1.0">
     <title>Sistema de Gerenciamento - Hotel</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -11,6 +11,7 @@
     <h1>Sistema de Gerenciamento - Hotel</h1>
 
     <div class="index-links">
+
         <div class="index-card">
             <h3>Clientes</h3>
             <a th:href="@{/cliente}">Gerenciar Clientes</a>
@@ -35,6 +36,11 @@
             <h3>Relatórios</h3>
             <a th:href="@{/relatorio}">Gerar Relatórios</a>
         </div>
+        <div class="index-card">
+            <h3>Quartos Disponíveis</h3>
+            <a th:href="@{/quarto/disponiveis}">Consultar Disponibilidade</a>
+        </div>
+
     </div>
 
     <div class="section-divider"></div>

@@ -1,6 +1,7 @@
 package br.edu.fateczl.hotel.service;
 
 import br.edu.fateczl.hotel.dto.QuartoDTO;
+import br.edu.fateczl.hotel.dto.QuartoDisponivelDTO;
 import br.edu.fateczl.hotel.mapper.QuartoMapper;
 import br.edu.fateczl.hotel.model.Quarto;
 import br.edu.fateczl.hotel.repository.QuartoRepository;
@@ -8,6 +9,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,6 +65,26 @@ public class QuartoService {
 
     public List<QuartoDTO> listarQuartos() {
         return quartoRepository.findAll().stream().map(quartoMapper::toDto).toList();
+    }
+
+    public List<QuartoDisponivelDTO> listarQuartosDisponiveis(LocalDate data) {
+
+        List<Quarto> quartos = quartoRepository.listarQuartosDisponiveis(data);
+
+        List<QuartoDisponivelDTO> dtos = new ArrayList<>();
+
+        for (Quarto q : quartos) {
+
+            QuartoDisponivelDTO dto = new QuartoDisponivelDTO(
+                    q.getNumero(),
+                    q.getAndar(),
+                    q.getDescricao()
+            );
+
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 
 }
