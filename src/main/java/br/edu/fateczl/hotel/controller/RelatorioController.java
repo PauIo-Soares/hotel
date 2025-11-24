@@ -68,4 +68,74 @@ public class RelatorioController {
         }
     }
 
+    @PostMapping("/reservasClientes")
+    public ResponseEntity gerarRelatorioReservasClientes(@RequestParam Map<String, String> params){
+        String erro = "";
+        String data = params.get("data");
+
+        Map<String, Object> relatorioParams = new HashMap<String, Object>();
+        relatorioParams.put("data", data);
+
+        byte[] bytes = null;
+
+        InputStreamResource resource = null;
+        HttpStatus status = null;
+        HttpHeaders header = new HttpHeaders();
+
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try{
+            File arquivo = ResourceUtils.getFile("classpath:reports/ReservaCliente.jasper");
+            JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(arquivo.getAbsolutePath());
+            bytes = JasperRunManager.runReportToPdf(report, relatorioParams, conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+            erro = e.getMessage();
+            status = HttpStatus.BAD_REQUEST;
+        } finally {
+            if(erro.equals("")){
+                ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+                resource = new InputStreamResource(stream);
+                header.setContentLength(bytes.length);
+                header.setContentType(MediaType.APPLICATION_PDF);
+                status = HttpStatus.OK;
+            }
+            return new ResponseEntity(resource, header, status);
+        }
+    }
+
+    @PostMapping("/checkoutClienteEstadia")
+    public ResponseEntity gerarRelatorioCheckoutCliente(@RequestParam Map<String, String> params){
+        String erro = "";
+        String codEstadia = params.get("codigo");
+
+        Map<String, Object> relatorioParams = new HashMap<String, Object>();
+        relatorioParams.put("estadia_id", codEstadia);
+
+        byte[] bytes = null;
+
+        InputStreamResource resource = null;
+        HttpStatus status = null;
+        HttpHeaders header = new HttpHeaders();
+
+        Connection conn = DataSourceUtils.getConnection(dataSource);
+        try{
+            File arquivo = ResourceUtils.getFile("classpath:reports/CheckoutEstadia.jasper");
+            JasperReport report = (JasperReport) JRLoader.loadObjectFromFile(arquivo.getAbsolutePath());
+            bytes = JasperRunManager.runReportToPdf(report, relatorioParams, conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+            erro = e.getMessage();
+            status = HttpStatus.BAD_REQUEST;
+        } finally {
+            if(erro.equals("")){
+                ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+                resource = new InputStreamResource(stream);
+                header.setContentLength(bytes.length);
+                header.setContentType(MediaType.APPLICATION_PDF);
+                status = HttpStatus.OK;
+            }
+            return new ResponseEntity(resource, header, status);
+        }
+    }
+
 }
