@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quartos Disponíveis</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Quartos Disponíveis</h1>
+    <div th:if="${mensagem}"
+         th:class="${mensagem.contains('sucesso') or mensagem.contains('Sucesso') ? 'mensagem sucesso' : 'mensagem erro'}">
+        <p th:text="${mensagem}"></p>
+    </div>
+    <h2>Consultar Quartos Disponíveis por Data</h2>
+
+    <form th:action="@{/quarto/quartos-disponiveis}" method="post" class="form-inline">
+        <div class="form-group">
+            <label for="dataConsulta">Data:</label>
+            <input type="date" id="dataConsulta" name="data" required>
+        </div>
+        <button type="submit" class="btn-info">Consultar</button>
+    </form>
+
+    <div class="section-divider"></div>
+    <div th:if="${listaQuartos}">
+        <h2>Resultado da Consulta</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Número</th>
+                <th>Andar</th>
+                <th>Tipo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="qd : ${listaQuartos}">
+                <td th:text="${qd.numero}"></td>
+                <td th:text="${qd.andar}"></td>
+                <td th:text="${qd.tipoQuartoDescricao}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${listaQuartos != null and #lists.isEmpty(listaQuartos)}" class="mensagem erro">
+        <p>Nenhum quarto disponível encontrado para esta data.</p>
+    </div>
+    <a th:href="@{/}" class="voltar-link">← Voltar para o Menu Principal</a>
+</div>
+</body>
+</html>

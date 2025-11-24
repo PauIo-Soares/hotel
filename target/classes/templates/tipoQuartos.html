@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Tipos de Quarto</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Gerenciamento de Tipos de Quarto</h1>
+
+    <div th:if="${mensagem}"
+         th:class="${mensagem.contains('sucesso') or mensagem.contains('Sucesso') ? 'mensagem sucesso' : 'mensagem erro'}">
+        <p th:text="${mensagem}"></p>
+    </div>
+
+    <h2>Cadastrar/Atualizar Tipo de Quarto</h2>
+    <form th:action="@{/tipoQuarto/criar}" th:object="${tipoQuarto}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="valorDiaria">Valor da Diária:</label>
+            <input type="text" id="valorDiaria" th:field="*{valorDiaria}" placeholder="0.00" required>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn-primary">Cadastrar</button>
+            <button type="submit" formaction="/tipoQuarto/atualizar" class="btn-warning">Atualizar</button>
+        </div>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <h2>Buscar Tipo de Quarto por ID</h2>
+    <form th:action="@{/tipoQuarto/buscar}" method="post" class="form-inline">
+        <div class="form-group">
+            <label for="idBusca">ID:</label>
+            <input type="number" id="idBusca" name="id" required>
+        </div>
+        <button type="submit" class="btn-info">Buscar</button>
+    </form>
+
+    <div th:if="${resultadoBusca}" class="resultado-busca">
+        <h3>Resultado da Busca</h3>
+        <p><strong>ID:</strong> <span th:text="${resultadoBusca.id}"></span></p>
+        <p><strong>Nome:</strong> <span th:text="${resultadoBusca.nome}"></span></p>
+        <p><strong>Valor da Diária:</strong> R$ <span th:text="${resultadoBusca.valorDiaria}"></span></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2>Excluir Tipo de Quarto</h2>
+    <form th:action="@{/tipoQuarto/excluir}" method="post" class="form-inline">
+        <div class="form-group">
+            <label for="idExcluir">ID:</label>
+            <input type="number" id="idExcluir" name="id" required>
+        </div>
+        <button type="submit" class="btn-danger">Excluir</button>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <h2>Listar Todos os Tipos de Quarto</h2>
+    <form th:action="@{/tipoQuarto/listar}" method="post">
+        <button type="submit" class="btn-success">Listar Todos</button>
+    </form>
+
+    <div th:if="${listaTiposQuarto}">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Valor da Diária</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tipo : ${listaTiposQuarto}">
+                <td th:text="${tipo.id}"></td>
+                <td th:text="${tipo.nome}"></td>
+                <td th:text="'R$ ' + ${tipo.valorDiaria}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a th:href="@{/}" class="voltar-link">← Voltar para o Menu Principal</a>
+</div>
+</body>
+</html>

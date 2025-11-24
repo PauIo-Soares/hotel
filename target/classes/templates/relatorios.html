@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios do Sistema</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Relatórios do Sistema</h1>
+
+    <div th:if="${mensagem}"
+         th:class="${mensagem.contains('sucesso') or mensagem.contains('Sucesso') ? 'mensagem sucesso' : 'mensagem erro'}">
+        <p th:text="${mensagem}"></p>
+    </div>
+
+    <h2>1. Relatório de Quartos Disponíveis</h2>
+    <p>Gera um relatório dos quartos disponíveis em uma data específica.</p>
+    <form th:action="@{/relatorio/quartosDisponiveis}" method="post" target="_blank">
+        <div class="form-group">
+            <label for="dataQuartosDisponiveis">Data:</label>
+            <input type="text" id="dataQuartosDisponiveis" name="data" placeholder="dd/mm/aaaa" required>
+        </div>
+        <button type="submit" class="btn-primary">Gerar Relatório de Quartos Disponíveis</button>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <h2>2. Relatório de Checkout da Estadia</h2>
+    <p>Gera um relatório em PDF com os dados do cliente, hospedagem, serviços consumidos e valor total.</p>
+    <form th:action="@{/relatorio/checkoutClienteEstadia}" method="post"  target="_blank">
+        <div class="form-group">
+            <label for="codigoEstadia">Código da Estadia:</label>
+            <input type="text" id="codigoEstadia" name="codigo" placeholder="Digite o código da estadia"
+                   required>
+        </div>
+        <button type="submit" class="btn-success">Gerar Relatório de Checkout</button>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <h2>3. Relatório Geral</h2>
+    <p>Gera um relatório geral com dados de clientes, quartos, valores e reservas de um dia específico.</p>
+    <form th:action="@{/relatorio/reservasClientes}" method="post"  target="_blank">
+        <div class="form-group">
+            <label for="dataRelatorioGeral">Data:</label>
+            <input type="text" id="dataRelatorioGeral" name="data" placeholder="dd/mm/aaaa" required>
+        </div>
+        <button type="submit" class="btn-info">Gerar Relatório Geral</button>
+    </form>
+
+    <div class="section-divider"></div>
+
+    <a th:href="@{/}" class="voltar-link">← Voltar para o Menu Principal</a>
+</div>
+</body>
+</html>
