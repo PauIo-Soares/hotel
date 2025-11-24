@@ -1,1 +1,16 @@
-SOLID
+Aplicação dos Princípios SOLID no Sistema:
+
+S - Cada classe e metodo possui uma responsabilidade única e bem definida:
+Controller: recebe requisições e prepara dados para a view.
+Service: contém as regras de negócio.
+Repository: acesso ao banco.
+DTO: transportar dados entre camadas.
+Mapper: converter entre entidade e DTO.
+
+O — O uso de interfaces do Spring Data JPA, DTOs e mappers permite estender comportamentos sem alterar estruturas já existentes
+
+L — O LSP é atendido pelo uso das abstrações do Spring.
+
+I — O sistema atende ao ISP, utilizando os repositórios prontos do Spring que já respeitam o princípio.
+
+D — Dependências são injetadas pelo Spring (@Autowired).
